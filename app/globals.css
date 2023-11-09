@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Adicione isso ao seu arquivo de estilos ou folha de estilos global */
+@keyframes borderAnimation {
+  0%,
+  100% {
+    border-color: var(--tw-border-color);
+  }
+  50% {
+    border-color: var(--tw-gradient-stops);
+  }
+}
