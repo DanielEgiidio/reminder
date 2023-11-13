@@ -50,6 +50,9 @@ function WelcomeMsgFallback() {
 async function CollectionList() {
   const user = await currentUser();
   const collections = await prisma.collection.findMany({
+    include: {
+      task: true,
+    },
     where: {
       userId: user?.id,
     },
@@ -75,7 +78,10 @@ async function CollectionList() {
       <CreateCollectionBtn />
       <div className="flex flex-col gap-4 mt-6">
         {collections.map((collection) => (
-          <CollectionCard key={collection.id} collection={collection} />
+          <CollectionCard
+            key={collection.id}
+            collection={{ ...collection, tasks: collection.task }}
+          />
         ))}
       </div>
     </>

@@ -30,14 +30,18 @@ import CreateTaskDialog from "./CreateTaskDialog";
 import TaskCard from "./TaskCard";
 
 interface Props {
-  collection: Collection;
+  collection: Collection & {
+    tasks: Task[];
+  };
 }
-
-const tasks = ["task 1", "task 2"];
 
 function CollectionCard({ collection }: Props) {
   const [isOpen, setIsOpen] = useState(true);
   const router = useRouter();
+
+  const [showCreateModal, setShowCreateModal] = useState(false);
+
+  const tasks = collection.tasks;
 
   const [isLoading, startTransition] = useTransition();
 
@@ -58,8 +62,22 @@ function CollectionCard({ collection }: Props) {
     }
   };
 
+  const tasksDone = useMemo(() => {
+    return collection.tasks.filter((task) => task.done).length;
+  }, [collection.tasks]);
+
+  const totalTasks = collection.tasks.length;
+
+  const progress = totalTasks === 0 ? 0 : (tasksDone / totalTasks) * 100;
+
   return (
     <>
+      <CreateTaskDialog
+        open={showCreateModal}
+        setOpen={setShowCreateModal}
+        collection={collection}
+      />
+
       <Collapsible open={isOpen} onOpenChange={setIsOpen}>
         <CollapsibleTrigger asChild>
           <Button
@@ -76,58 +94,74 @@ function CollectionCard({ collection }: Props) {
           </Button>
         </CollapsibleTrigger>
         <CollapsibleContent className="flex rounded-b-md flex-col dark:bg-neutral-900 shadow-lg">
-          {tasks.length == 0 && <div> There are no tasks yet:</div>}
-
+          {tasks.length === 0 && (
+            <Button
+              variant={"ghost"}
+              className="flex items-center justify-center gap-1 p-8 py-12 rounded-none"
+              onClick={() => setShowCreateModal(true)}
+            >
+              <p>There are no tasks yet:</p>
+              <span
+                className={cn(
+                  "text-sm bg-clip-text text-transparent",
+                  CollectionColors[collection.color as CollectionColor]
+                )}
+              >
+                Create one
+              </span>
+            </Button>
+          )}
           {tasks.length > 0 && (
             <>
-              <Progress className="rounded-none" value={45} />
+              <Progress className="rounded-none" value={progress} />
               <div className="p-4 gap-3 flex flex-col">
                 {tasks.map((task) => (
-                  <div>mocked task</div>
+                  <TaskCard key={task.id} task={task} />
                 ))}
               </div>
             </>
           )}
-
           <Separator />
           <footer className="h-[40px] px-4 p-[2px] text-xs text-neutral-500 flex justify-between items-center ">
             <p>Created at {collection.createdAt.toLocaleDateString("en-US")}</p>
-            <div>
-              {isLoading && <div>Deleting...</div>}
-              {!isLoading && (
-                <div>
-                  <Button size={"icon"} variant={"ghost"}>
-                    <PlusIcon />
-                  </Button>
-                  <AlertDialog>
-                    <AlertDialogTrigger asChild>
-                      <Button size={"icon"} variant={"ghost"}>
-                        <TrashIcon />
-                      </Button>
-                    </AlertDialogTrigger>
-                    <AlertDialogContent>
-                      <AlertDialogTitle>
-                        Are you absolutely sure?
-                      </AlertDialogTitle>
-                      <AlertDialogDescription>
-                        This action cannot be undone. This will permanently
-                        delete your collection and all tasks inside it.
-                      </AlertDialogDescription>
-                      <AlertDialogFooter>
-                        <AlertDialogCancel>Cancel</AlertDialogCancel>
-                        <AlertDialogAction
-                          onClick={() => {
-                            startTransition(removeCollection);
-                          }}
-                        >
-                          Proceed
-                        </AlertDialogAction>
-                      </AlertDialogFooter>
-                    </AlertDialogContent>
-                  </AlertDialog>
-                </div>
-              )}
-            </div>
+            {isLoading && <div>Deleting...</div>}
+            {!isLoading && (
+              <div>
+                <Button
+                  size={"icon"}
+                  variant={"ghost"}
+                  onClick={() => setShowCreateModal(true)}
+                >
+                  <PlusIcon />
+                </Button>
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                    <Button size={"icon"} variant={"ghost"}>
+                      <TrashIcon />
+                    </Button>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent>
+                    <AlertDialogTitle>
+                      Are you absolutely sure?
+                    </AlertDialogTitle>
+                    <AlertDialogDescription>
+                      This action cannot be undone. This will permanently delete
+                      your collection and all tasks inside it.
+                    </AlertDialogDescription>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Cancel</AlertDialogCancel>
+                      <AlertDialogAction
+                        onClick={() => {
+                          startTransition(removeCollection);
+                        }}
+                      >
+                        Proceed
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+              </div>
+            )}
           </footer>
         </CollapsibleContent>
       </Collapsible>
