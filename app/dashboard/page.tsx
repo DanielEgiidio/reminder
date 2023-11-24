@@ -13,8 +13,8 @@ interface Collection {
 
 interface User {
   id: string;
-  firstName: string;
-  lastName: string;
+  firstName: string | null;
+  lastName: string | null;
 }
 
 export default async function Home() {
