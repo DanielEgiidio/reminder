@@ -31,8 +31,7 @@ export default async function Home() {
 }
 
 async function WelcomMsg() {
-  const user = await currentUser();
-
+  const user: User | null = await currentUser();
   if (!user) {
     return <div>Deu ruim.</div>;
   }
@@ -62,7 +61,7 @@ function WelcomeMsgFallback() {
 
 async function CollectionList() {
   const user = await currentUser();
-  const collections = await prisma.collection.findMany({
+  const collections: Collection[] = await prisma.collection.findMany({
     include: {
       task: true,
     },
