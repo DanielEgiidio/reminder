@@ -49,14 +49,14 @@ function CollectionCard({ collection }: Props) {
     try {
       await deleteCollection(collection.id);
       toast({
-        title: "Success",
-        description: "Collection deleted successfully",
+        title: "Deu Certo",
+        description: "Sua Lista foi deletada com sucesso",
       });
       router.refresh();
     } catch (e) {
       toast({
-        title: "Error",
-        description: "Cannot delete collection",
+        title: "Deu Ruim",
+        description: "Não deu certo deletar sua lista",
         variant: "destructive",
       });
     }
@@ -100,14 +100,14 @@ function CollectionCard({ collection }: Props) {
               className="flex items-center justify-center gap-1 p-8 py-12 rounded-none"
               onClick={() => setShowCreateModal(true)}
             >
-              <p>There are no tasks yet:</p>
+              <p>Ainda não foram criadas tasks:</p>
               <span
                 className={cn(
                   "text-sm bg-clip-text text-transparent",
                   CollectionColors[collection.color as CollectionColor]
                 )}
               >
-                Create one
+                Crie uma
               </span>
             </Button>
           )}
@@ -123,8 +123,8 @@ function CollectionCard({ collection }: Props) {
           )}
           <Separator />
           <footer className="h-[40px] px-4 p-[2px] text-xs text-neutral-500 flex justify-between items-center ">
-            <p>Created at {collection.createdAt.toLocaleDateString("en-US")}</p>
-            {isLoading && <div>Deleting...</div>}
+            <p>Criado em {collection.createdAt.toLocaleDateString("pt-BR")}</p>
+            {isLoading && <div>Deletando...</div>}
             {!isLoading && (
               <div>
                 <Button
@@ -142,20 +142,20 @@ function CollectionCard({ collection }: Props) {
                   </AlertDialogTrigger>
                   <AlertDialogContent>
                     <AlertDialogTitle>
-                      Are you absolutely sure?
+                      Tu tem certeza meu nobre?
                     </AlertDialogTitle>
                     <AlertDialogDescription>
-                      This action cannot be undone. This will permanently delete
-                      your collection and all tasks inside it.
+                      Essa ação não pode ser desfeita. Isso excluirá
+                      permanentemente sua lista e todas as tarefas dentro dela.
                     </AlertDialogDescription>
                     <AlertDialogFooter>
-                      <AlertDialogCancel>Cancel</AlertDialogCancel>
+                      <AlertDialogCancel>Cancelar</AlertDialogCancel>
                       <AlertDialogAction
                         onClick={() => {
                           startTransition(removeCollection);
                         }}
                       >
-                        Proceed
+                        Continuar
                       </AlertDialogAction>
                     </AlertDialogFooter>
                   </AlertDialogContent>

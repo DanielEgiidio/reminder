@@ -8,7 +8,7 @@ const Navbar = () => {
     <nav className=" dark:bg-[#27272a] flex w-full items-center justify-between p-4 h-[60px]">
       <Logo />
       <div className="flex fap-4 items-center">
-        <UserButton afterSignOutUrl="/" />
+        <UserButton afterSignOutUrl="/dashboard" />
         <ThemeSwitcher />
       </div>
     </nav>

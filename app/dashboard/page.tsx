@@ -7,13 +7,23 @@ import { prisma } from "@/lib/prisma";
 import { currentUser } from "@clerk/nextjs";
 import { Suspense } from "react";
 
+interface Collection {
+  id: number;
+}
+
+interface User {
+  id: string;
+  firstName: string;
+  lastName: string;
+}
+
 export default async function Home() {
   return (
     <>
       <Suspense fallback={<WelcomeMsgFallback />}>
         <WelcomMsg />
       </Suspense>
-      <Suspense fallback={<div>Loading collections...</div>}>
+      <Suspense fallback={<div>Carregando as Listas de Tarefas...</div>}>
         <CollectionList />
       </Suspense>
     </>
@@ -24,13 +34,16 @@ async function WelcomMsg() {
   const user = await currentUser();
 
   if (!user) {
-    return <div>error</div>;
+    return <div>Deu ruim.</div>;
   }
 
   return (
     <div className="flex w-full mb-12">
       <h1 className="text-4xl font-bold">
-        Welcome, <br /> {user.firstName} {user.lastName}
+        Seja bem vindo, <br />{" "}
+        <span className="capitalize">
+          {user.firstName} {user.lastName}
+        </span>
       </h1>
     </div>
   );
@@ -63,10 +76,8 @@ async function CollectionList() {
       <div className="flex flex-col gap-5">
         <Alert>
           <SadFace />
-          <AlertTitle>There are no collections yet!</AlertTitle>
-          <AlertDescription>
-            Create a collection to get started
-          </AlertDescription>
+          <AlertTitle>Ainda não existem Listas de tarefas</AlertTitle>
+          <AlertDescription>Para começar, crie suas listas.</AlertDescription>
         </Alert>
         <CreateCollectionBtn />
       </div>

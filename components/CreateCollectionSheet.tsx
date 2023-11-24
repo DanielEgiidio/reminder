@@ -60,17 +60,16 @@ function CreateCollectionSheet({ open, onOpenChange }: Props) {
       router.refresh();
 
       toast({
-        title: "Success",
-        description: "Collection created successfully!",
+        title: "Deu certo!",
+        description: "Lista criada com sucesso.",
       });
     } catch (e: any) {
       // Show toast
       toast({
-        title: "Error",
-        description: "Something went wrong. Please try again later",
+        title: "Deu Ruim",
+        description: "Alguma coisa deu errado meu nobre, tente novamente.",
         variant: "destructive",
       });
-      console.log("Error while creating collection", e);
     }
   };
 
