@@ -7,16 +7,6 @@ import { prisma } from "@/lib/prisma";
 import { currentUser } from "@clerk/nextjs";
 import { Suspense } from "react";
 
-interface Collection {
-  id: number;
-}
-
-interface User {
-  id: string;
-  firstName: string | null;
-  lastName: string | null;
-}
-
 export default async function Home() {
   return (
     <>
@@ -31,7 +21,8 @@ export default async function Home() {
 }
 
 async function WelcomMsg() {
-  const user: User | null = await currentUser();
+  const user = await currentUser();
+
   if (!user) {
     return <div>Deu ruim.</div>;
   }
@@ -41,7 +32,7 @@ async function WelcomMsg() {
       <h1 className="text-4xl font-bold">
         Seja bem vindo, <br />{" "}
         <span className="capitalize">
-          {user.firstName} {user.lastName}
+          {user.firstName || ""} {user.lastName || ""}
         </span>
       </h1>
     </div>
@@ -61,7 +52,7 @@ function WelcomeMsgFallback() {
 
 async function CollectionList() {
   const user = await currentUser();
-  const collections: Collection[] = await prisma.collection.findMany({
+  const collections = await prisma.collection.findMany({
     include: {
       task: true,
     },
