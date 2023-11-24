@@ -13,7 +13,7 @@ export default async function Home() {
       <Suspense fallback={<WelcomeMsgFallback />}>
         <WelcomMsg />
       </Suspense>
-      <Suspense fallback={<div>Carregando as Listas de Tarefas...</div>}>
+      <Suspense fallback={<div>Loading collections...</div>}>
         <CollectionList />
       </Suspense>
     </>
@@ -24,16 +24,13 @@ async function WelcomMsg() {
   const user = await currentUser();
 
   if (!user) {
-    return <div>Deu ruim.</div>;
+    return <div>error</div>;
   }
 
   return (
     <div className="flex w-full mb-12">
       <h1 className="text-4xl font-bold">
-        Seja bem vindo, <br />{" "}
-        <span className="capitalize">
-          {user.firstName || ""} {user.lastName || ""}
-        </span>
+        Welcome, <br /> {user.firstName} {user.lastName}
       </h1>
     </div>
   );
@@ -54,7 +51,7 @@ async function CollectionList() {
   const user = await currentUser();
   const collections = await prisma.collection.findMany({
     include: {
-      task: true,
+      tasks: true,
     },
     where: {
       userId: user?.id,
@@ -66,8 +63,8 @@ async function CollectionList() {
       <div className="flex flex-col gap-5">
         <Alert>
           <SadFace />
-          <AlertTitle>Ainda não existem Listas de tarefas</AlertTitle>
-          <AlertDescription>Para começar, crie suas listas.</AlertDescription>
+          <AlertTitle>Ainda não existem coleções!</AlertTitle>
+          <AlertDescription>Para começar crie sua</AlertDescription>
         </Alert>
         <CreateCollectionBtn />
       </div>
@@ -79,10 +76,7 @@ async function CollectionList() {
       <CreateCollectionBtn />
       <div className="flex flex-col gap-4 mt-6">
         {collections.map((collection) => (
-          <CollectionCard
-            key={collection.id}
-            collection={{ ...collection, tasks: collection.task }}
-          />
+          <CollectionCard key={collection.id} collection={collection} />
         ))}
       </div>
     </>
