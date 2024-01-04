@@ -11,10 +11,8 @@
 
 ###### A aplicação em si é bem simples na usabilidade porém sua construção aborda não só as melhores práticas de clean code, como também as tecnologias mais recentes e usadas no mercado
 
+https://github.com/DanielEgiidio/reminder/assets/45204474/03cd1953-59d5-471c-a465-d58c6ec67684
 
-<video width="620" height="320" controls>
-  <source src="https://github.com/Yog9/SnapShot/assets/45204474/d23acbf9-5855-4828-861f-e8ea15603c57" type="video/mp4">
-</video>
 
 ------------
 
