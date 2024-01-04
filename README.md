@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# Reminder
+<img width="600" height="200" src="https://github.com/Yog9/SnapShot/assets/45204474/f404ec6e-ce2b-4c89-a25f-ce32bf007284"/>
+ 
 
-First, run the development server:
+------------
+
+
+### Info
+###### Entenda como uma aplicação de lembretes ou meta a se bater, onde você tem a possibilidade de criar quantas coleções quiser e dentro dessas coleções criar suas tasks a suas datas de expiraçã.
+
+###### A aplicação em si é bem simples na usabilidade porém sua construção aborda não só as melhores práticas de clean code, como também as tecnologias mais recentes e usadas no mercado
+
+
+<video width="620" height="320" controls>
+  <source src="https://github.com/Yog9/SnapShot/assets/45204474/d23acbf9-5855-4828-861f-e8ea15603c57" type="video/mp4">
+</video>
+
+------------
+
+
+### Tecnologias Usadas
+
+- [NEXTJS](https://nextjs.org/): Versão 14 com a features mais recentes fazendo uso do novo recurso server components e server actions.
+- [PRISMA](https://www.prisma.io/): Fazendo o banco de dados falar a mesma lingua da aplicação (Typescript)
+- [SHADCN](https://ui.shadcn.com/): Uma coleção de componentes tailwind editaveis e reutilizáveis.
+- [CLERK](https://clerk.com/): A aplicação conta com um controle de usuários por meio do Clerk, um Saas que facilita a implementação da autenticação.
+- [REACT HOOK FORM](https://react-hook-form.com/): Foi necessário uma validação de formulários na aplicação e foi utilizado essa Lib, Ela possibilita um bom desempenho, flexíbilidade e validação, e é bem simples o seu uso, na validação em si foi utilizado o zod tanto nos formulários quando no database.
+- [TYPESCRIPT](https://www.typescriptlang.org/docs/) 
+
+
+### Como rodar o projeto
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+$ cd reminder
+$ npm install 
+$ npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+######Obs: a aplicação está rodando localmente devido a estarmos utilizando o sqlLite, então sem você quiser reaproveitar os schemas, só modifique para um database na nuvem que utiliza Postegress que funcionará normalmente em deploy.
