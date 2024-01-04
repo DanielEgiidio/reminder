@@ -1,6 +1,6 @@
 
 # Reminder
-<img width="800" height="300" src="https://github.com/Yog9/SnapShot/assets/45204474/f404ec6e-ce2b-4c89-a25f-ce32bf007284"/>
+<img width="700" height="300" src="https://github.com/Yog9/SnapShot/assets/45204474/f404ec6e-ce2b-4c89-a25f-ce32bf007284"/>
  
 
 ------------
