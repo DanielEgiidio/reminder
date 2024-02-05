@@ -7,7 +7,7 @@
 
 
 ### Info
-###### Entenda como uma aplicação de lembretes ou meta a se bater, onde você tem a possibilidade de criar quantas coleções quiser e dentro dessas coleções criar suas tasks a suas datas de expiraçã.
+###### Entenda como uma aplicação de lembretes ou meta a se bater, onde você tem a possibilidade de criar quantas coleções quiser e dentro dessas coleções criar suas tasks a suas datas de expiração.
 
 ###### A aplicação em si é bem simples na usabilidade porém sua construção aborda não só as melhores práticas de clean code, como também as tecnologias mais recentes e usadas no mercado
 
